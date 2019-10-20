@@ -102,6 +102,179 @@ def onlyContainsStrings(theList):
         else:
             return True
                 
+
+def contains(x, theList):
+    '''
+    - Returns True if the value of x is in theList.
+    - The parameters x and theList can be anything.
+    - An emptyList should return False since it doesn't contain any values
+    (including x).
+    - If theList is not a list type, return False since x is not in a list.
+    '''
+    if type(theList)!=list:
+        return False
+    elif len(theList)==0:
+        return False
+    else:
+        if x in theList:
+                return True
+        else:
+            return False
+
+
+def abbreviate(word):
+    '''
+    - Returns a string with (up to) the first three characters of
+    the string word.
+    - The value of word can be anything.
+    - If word is not a string, return an empty string ("").
+    '''
+    if type(word)!=str:
+        return str()
+    else:
+        if len(word)<=3:
+            return word
+        else:
+            #return word[0]+word[1]+word[2]
+            abbreviation=list(range(0,3))
+            for i in range(len(abbreviation)):
+                abbreviation[i]=word[i]
+            for i in range(len(abbreviation)-1):
+                abbreviation[0]=abbreviation[0]+abbreviation[i+1]
+            return abbreviation[0]
+                
+                        
+def hasMultiplesOf(x, listOfNums):
+    '''
+    - Returns True if ALL items in listOfNums are multiples of x.
+    - theList can have elements of any type.
+    - If listOfNums is not a list type, return False.
+    - If listOfNums is empty, return False since no items are a multiple
+    of x
+    - If listOfNums contains an element that is not a number (int or
+    float), return False.
+    '''
+    if type(x)==int or type(x)==float:
+        if type(listOfNums)!=list:
+            return False
+        elif len(listOfNums)==0:
+            return False
+        else:
+            for n in listOfNums:
+                if type(n)==int or type(n)==float:
+                    while (n%x)==0:
+                        return True
+                else:
+                    return False
+    else:
+        return False
+
+
+def countEvens(listOfInts):
+    '''
+    - Returns an integer value representing the number of even numbers that
+    exist in listOfInts.
+    - Return 0 if listOfInts is not a list type or if no even number exists
+    in listOfInts.
+    - Note: elements in listOfInts can contain any data type.
+    '''
+    if type(listOfInts)!=list:
+        return 0
+    else:
+        for i in range(len(listOfInts)):
+            if type(listOfInts[i])!=int and type(listOfInts[i])!=float:
+                listOfInts[i]=0
+            else:
+                if listOfInts[i]%2==0:
+                    listOfInts[i]=1
+                else:
+                    listOfInts[i]=0
+        return sum(listOfInts)
+
+            
+def computeGrade(percentage):
+    '''
+    - Return the corresponding letter grade string based on the value of
+    percentage using the following scale:
+    [100 - 90]: 'A'
+    (90 - 80] : 'B'
+    (80 - 70] : 'C'
+    (70 - 60] : 'D'
+    (60 - 0]  : 'F'
+    - If percentage is not a number type (int or float) OR if percentage is
+    outside the range of [100 - 0], return an empty string ("").
+    '''
+    if type(percentage)!=int and type(percentage)!=float:
+        return str()
+    elif percentage<0 or percentage>100:
+        return str()
+    else:
+        while type(percentage)==float:
+            percentage=int(percentage)
+        if percentage in range(0, 60):
+            return "F"
+        elif percentage in range(60, 70):
+            return "D"
+        elif percentage in range(70, 80):
+            return "C"
+        elif percentage in range(80, 90):
+            return "B"
+        elif percentage in range(80, 101):
+            return "A"
+        
+                
+# Definition of a Book namedtuple object used for the
+# following function below.
+from collections import namedtuple
+Book = namedtuple("Book", "title author price")
+
+def expensiveBooks(price, listOfBooks):
+    '''
+    - Returns a list of book titles of Books that are greater or equal to
+    the value price.
+    - If price is not a number type, then return an empty list ([]).
+    - If listOfBooks is not a list type, then return an empty list ([]).
+    - Elements in listOfBooks may contain multiple types (not necessarily
+    Books). You can check if an element is a Book object with
+    type(value) == Book. You can "skip" an element that's not a Book and
+    continue checking other elements in listOfBooks.
+    - You can assume Book objects are constructed correctly (i.e. title
+    and author are strings, and book prices are either an int or float).
+    - Note: You must obtain values of a book object using the name of
+    the object's attributes (.title, .author, .price) instead of indexing
+    them for full credit (as discussed in lecture). 
+    - Hint: Think of appending book titles to a list (recall .append) when
+    the cost of the book is greater than the value price, and returning the
+    list of accumulated book titles.
+    '''
+    if type(price)!=int and type(price)!=float:
+        return list()
+    elif type(listOfBooks)!=list:
+        return list()
+    else:
+        n=0
+        for x in listOfBooks:
+            if x.price>=price:
+                n=n+1
+        priceyBooks=list(range(n))
+        i=0
+        for x in listOfBooks:
+            if x.price>=price:
+                priceyBooks[i]=x.title
+                i=i+1
+        return priceyBooks
+        '''
+        priceyBooks=list()
+        for x in listOfBooks:
+            if x.price>=price:
+                priceyBooks.append(x.title)
+        return priceyBooks'''
+                
+                
+            
+    
+
+
                     
 
 
